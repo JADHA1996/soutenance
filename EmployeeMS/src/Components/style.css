@@ -1,0 +1,31 @@
+.loginPage {
+    background: url('Images/ingenieur.jpg');
+    background: linear-gradient(rgba(11, 11, 11, 0.5), rgba(10, 10, 10, 0.5)), url("Images/ingenieur.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 120%;
+}
+
+.loginForm {
+    background-color: rgba(20, 51, 87, 0.534);
+    color: rgb(243, 237, 237);
+}
+
+ul li :hover {
+    background-color: rgba(236, 161, 161, 0.664);
+}
+
+.employee_image {
+    width: 100%;
+    max-width: 40px;
+    height: auto;
+    border-radius: 50%;
+}
+
+
+.emp_det_image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 50%;
+}
