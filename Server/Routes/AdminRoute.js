@@ -1,9 +1,9 @@
-import express from "express";
-import con from "../utils/db.js";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import multer from "multer";
-import path from "path";
+const express = require("express");
+const con = require("../utils/db.js");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const multer = require("multer");
+const path = require("path");
 
 const router = express.Router();
 
@@ -39,7 +39,7 @@ router.get("/category", (req, res) => {
 });
 
 router.post("/add_category", (req, res) => {
-  const sql = "INSERT INTO category (`name`) VALUES (?)";
+  const sql = "INSERT INTO category (name) VALUES (?)";
   con.query(sql, [req.body.category], (err, result) => {
     if (err) return res.json({ Status: false, Error: "Erreur de requête" });
     return res.json({ Status: true });
@@ -67,7 +67,7 @@ router.post("/add_employee", upload.single("image"), async (req, res) => {
   const sql = `INSERT INTO employee 
     (name,email,password,address,salary,image,category_id) 
     VALUES (?,?,?,?,?,?,?)`;
-    
+
   console.log(req.body);
   console.log(req.file);
   const hash = await bcrypt.hash(req.body.password, 10);
@@ -80,7 +80,7 @@ router.post("/add_employee", upload.single("image"), async (req, res) => {
     req.file.filename,
     parseInt(req.body.category_id),
   ];
-  console.log("mot de passe hash",hash);
+  console.log("mot de passe hash", hash);
   con.query(sql, [values], (err, result) => {
     if (err) return res.json({ Status: false, Error: err });
     return res.json({ Status: true });
@@ -174,4 +174,4 @@ router.get("/logout", (req, res) => {
   return res.json({ Status: true });
 });
 
-export { router as adminRouter };
+module.exports = router;

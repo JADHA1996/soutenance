@@ -1,11 +1,15 @@
-import express from "express";
-import cors from "cors";
-import { adminRouter } from "./Routes/AdminRoute.js";
-import { EmployeeRouter } from "./Routes/EmployeeRoute.js";
-import Jwt from "jsonwebtoken";
-import cookieParser from "cookie-parser";
+const express = require("express");
+const cors = require("cors");
+const adminRouter = require("./Routes/AdminRoute.js");
+const EmployeeRouter = require("./Routes/EmployeeRoute.js");
+const Jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+
+const path = require("path");
 
 const app = express();
+const HTML = path.join(__dirname, "../../EmployeeMS/dist");
+
 app.use(
   cors({
     origin: ["http://localhost:5173"],
@@ -17,7 +21,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/auth", adminRouter);
 app.use("/employee", EmployeeRouter);
-app.use(express.static("Public"));
+// app.use(express.static("Public"));
+app.use(express.static(HTML));
 
 const verifyUser = (req, res, next) => {
   const token = req.cookies.token;
